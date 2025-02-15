@@ -16,7 +16,7 @@ const Banner = () => {
         </p>
 
         {/* CTA Button */}
-        <Link href="/dashboard">
+        <Link href="/dashboard/meeting-rooms">
           <button className="bg-white text-blue-600 font-semibold px-6 py-3 rounded-lg hover:bg-blue-100 transition">
             Get Started
           </button>
