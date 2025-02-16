@@ -13,7 +13,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({ href, icon, label }) => {
   return (
     <Link href={href} className="flex items-center space-x-3 p-3 hover:bg-gray-700 transition">
       <span className="text-xl">{icon}</span>
-      <span className="text-lg hidden md:inline">{label}</span>
+      <span className="text-lg hidden sm:inline">{label}</span>
     </Link>
   );
 };
@@ -23,7 +23,7 @@ const Sidebar: React.FC = () => {
   return (
     <div className="h-screen bg-gray-600 text-white flex flex-col">
       {/* Sidebar Menu */}
-      <nav className="mt-4 flex flex-col space-y-4">
+      <nav className="lg:ml-4 mt-4 flex flex-col space-y-4">
         <SidebarItem href="/dashboard/meeting-rooms" icon={<FaDoorOpen />} label="Meeting Rooms" />
         <SidebarItem href="/dashboard/my-bookings" icon={<FaCalendarCheck />} label="My Bookings" />
         <SidebarItem href="/dashboard/all-bookings" icon={<FaClipboardList />} label="All Bookings" />
