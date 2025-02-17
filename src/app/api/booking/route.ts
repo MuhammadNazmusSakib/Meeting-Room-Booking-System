@@ -22,6 +22,20 @@ export const POST = async (req: NextRequest) => {
         const startTime = new Date(body.startTime);
         const endTime = new Date(body.endTime);
 
+
+        // Check if startTime is after endTime
+        if (startTime >= endTime) {
+            return NextResponse.json({ message: "Start time must be before end time." }, { status: 400 });
+        }
+
+        // Check if the duration between start and end times is less than 30 minutes
+        const diffInMs = endTime.getTime() - startTime.getTime();
+        const diffInMinutes = diffInMs / (1000 * 60);
+
+        if (diffInMinutes < 30) {
+            return NextResponse.json({ message: "Booking duration should be at least 30 minutes." }, { status: 400 });
+        }
+
         // Check if the room is already booked within the requested time range
         const existingBooking = await prisma.booking.findFirst({
             where: {

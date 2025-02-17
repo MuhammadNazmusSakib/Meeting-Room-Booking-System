@@ -5,6 +5,7 @@ import {
 } from '@clerk/nextjs'
 import "./globals.css";
 import Header from "./components/Header";
+import QueryProvider from "./components/QueryProvider";
 
 
 const geistSans = localFont({
@@ -29,17 +30,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          <Header />
-          <main>
-            {children}
-          </main>
-        </body>
-      </html>
-    </ClerkProvider>
+
+    <html lang="en">
+      <ClerkProvider>
+        <QueryProvider>
+          <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+            <Header />
+            <main>{children}</main>
+          </body>
+        </QueryProvider>
+      </ClerkProvider>
+    </html>
+
   );
 }
