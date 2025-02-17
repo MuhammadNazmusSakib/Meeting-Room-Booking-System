@@ -9,7 +9,7 @@ export default function DashboardLayout({
   }>) {
   return (
     <div className='max-w-screen-2xl mx-auto'>
-      <div className="flex h-full">
+      <div className="flex min-h-screen">
         {/* Sidebar */}
         <Sidebar/>
 

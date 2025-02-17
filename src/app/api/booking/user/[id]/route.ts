@@ -39,11 +39,52 @@ export const PUT = async (req: Request) => {
 
         // Get the data from the request body (the new Booking details)
         const body = await req.json();
+
+        
+        const startTime = new Date(body.startTime);
+        const endTime = new Date(body.endTime);
+
+
+        // Check if startTime is after endTime
+        if (startTime >= endTime) {
+            return NextResponse.json({ message: "Start time must be before end time." }, { status: 400 });
+        }
+
+        // Check if the duration between start and end times is less than 30 minutes
+        const diffInMs = endTime.getTime() - startTime.getTime();
+        const diffInMinutes = diffInMs / (1000 * 60);
+
+        if (diffInMinutes < 30) {
+            return NextResponse.json({ message: "Booking duration should be at least 30 minutes." }, { status: 400 });
+        }
+
+        // Check if the room is already booked within the requested time range
+        const existingBooking = await prisma.booking.findFirst({
+            where: {
+                roomId: body.roomId,
+                OR: [
+                    {
+                        AND: [
+                            { startTime: { lte: endTime } },
+                            { endTime: { gte: startTime } },
+                        ],
+                    },
+                ],
+            },
+        });
+
+        if (existingBooking) {
+            return NextResponse.json(
+                { message: "Room is already booked for the selected time" },
+                { status: 409 } // Conflict status code
+            );
+        }
+
         
 
         // Update the Booking in the database
         const updatedBooking = await prisma.booking.update({
-            where: { id: id }, 
+            where: { id: id },
             data: {
                 startTime: body.startTime,
                 endTime: body.endTime,

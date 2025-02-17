@@ -2,11 +2,12 @@
 "use client";
 
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import axios from "axios";
 import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
+import 'react-calendar/dist/Calendar.css';
 import { useState } from "react";
+
 
 type MeetingRoom = {
   id: string;
@@ -26,6 +27,9 @@ type Booking = {
 
 export default function RoomDetails() {
   const { id } = useParams();
+  const searchParams = useSearchParams();
+  const bookId = searchParams.get("bookId");
+
   const [startDate, setStartDate] = useState<string>("");
   const [endDate, setEndDate] = useState<string>("");
   const [startTime, setStartTime] = useState<string>("");
@@ -36,18 +40,18 @@ export default function RoomDetails() {
 
   // Fetch room details
   const { data: room, isLoading: roomLoading, error: roomError } = useQuery<MeetingRoom>({
-    queryKey: ["meetingRoom", id],
+    queryKey: ["meetingRoom", bookId],
     queryFn: async () => {
-      const response = await axios.get(`http://localhost:3000/api/meeting-rooms/${id}`);
+      const response = await axios.get(`http://localhost:3000/api/meeting-rooms/${bookId}`);
       return response.data.room;
     },
   });
 
   // Fetch room availability
   const { data: bookings, isLoading: bookingsLoading, error: bookingsError } = useQuery<Booking[]>({
-    queryKey: ["roomAvailability", id],
+    queryKey: ["roomAvailability", bookId],
     queryFn: async () => {
-      const response = await axios.get(`http://localhost:3000/api/booking/availablity/${id}`);
+      const response = await axios.get(`http://localhost:3000/api/booking/availablity/${bookId}`);
       return response.data.bookings;
     },
   });
@@ -62,7 +66,7 @@ export default function RoomDetails() {
 
       const formattedStartTime = new Date(`${startDate}T${startTime}:00`)
       const formattedEndTime = new Date(`${endDate}T${endTime}:00`)
-
+      
 
       // Check if startTime is after endTime
       if (formattedStartTime >= formattedEndTime) {
@@ -79,9 +83,9 @@ export default function RoomDetails() {
         return;
       }
 
-      const response = await axios.post("http://localhost:3000/api/booking", {
-        roomId: id,
-        title: room?.name || "Meeting Room",
+      const response = await axios.put(`http://localhost:3000/api/booking/user/${id}`, {
+        // roomId: id,
+        // title: room?.name || "Meeting Room",
         startTime: formattedStartTime.toISOString(),
         endTime: formattedEndTime.toISOString(),
       });
@@ -91,16 +95,16 @@ export default function RoomDetails() {
     onSuccess: (succcess: any) => {
       // setMessage("Booking Successful!");
       if (succcess.response) {
-        setMessage(succcess.response.data.message || "Booking Successful!...");
+        setMessage(succcess.response.data.message || "Edit Successful!...");
       } else {
-        setMessage("Booking Successful!..");
+        setMessage("Edit Successful!..");
       }
     },
     onError: (error: any) => {
       if (error.response) {
-        setErrorMessage(error.response.data.message || "Booking Failed. Please try again.");
+        setErrorMessage(error.response.data.message || "Edit Failed. Please try again.");
       } else {
-        setErrorMessage("Booking Failed. Something Went Wrong!");
+        setErrorMessage("Edit Failed. Something Went Wrong!");
       }
     },
   });
@@ -123,9 +127,9 @@ export default function RoomDetails() {
       </ul>
 
       {/* Calendar View for Availability */}
-      <div className="mt-6">
+      <div className="w-full sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl mt-6">
         <h2 className="text-xl font-semibold mb-2">Room Availability</h2>
-        <Calendar
+        <Calendar 
           tileDisabled={({ date }) =>
             (bookedDates ?? []).some((bookedDate) => bookedDate.toDateString() === date.toDateString())
           }
@@ -181,4 +185,7 @@ export default function RoomDetails() {
     </div>
   );
 }
+
+
+
 
