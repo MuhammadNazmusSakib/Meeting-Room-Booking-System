@@ -2,7 +2,7 @@ import Link from 'next/link'
 import React from 'react'
 import { auth } from '@clerk/nextjs/server'
 import { UserButton } from '@clerk/nextjs'
-//import { SignInButton, SignUpButton } from '@clerk/nextjs'
+
 
 const Header = async () => {
 
@@ -10,8 +10,8 @@ const Header = async () => {
 
 
   return (
-    <nav className="bg-blue-600 p-4 shadow-lg">
-      <div className="max-w-7xl mx-auto flex justify-between items-center">
+    <nav className="bg-blue-600 p-4 sticky top-0 w-full z-50 shadow-lg">
+      <div className="max-w-6xl mx-auto flex justify-between items-center">
         {/* Logo / Home */}
         <Link href="/">
           <span className="text-white text-xl font-bold uppercase cursor-pointer">Room Booking</span>

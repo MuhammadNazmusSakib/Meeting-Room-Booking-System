@@ -7,7 +7,7 @@ const Banner = () => {
       <div className="absolute inset-0 bg-black bg-opacity-40"></div>
 
       {/* Banner Content */}
-      <div className="relative z-10 max-w-3xl mx-auto">
+      <div className="relative z-10 max-w-5xl mx-auto">
         <h1 className="text-4xl md:text-6xl font-extrabold mb-6">
           Effortlessly Book Your Meeting Rooms
         </h1>

@@ -6,6 +6,8 @@ import {
 import "./globals.css";
 import Header from "./components/Header";
 import QueryProvider from "./components/QueryProvider";
+import Footer from "./components/Footer";
+
 
 
 const geistSans = localFont({
@@ -36,6 +38,7 @@ export default function RootLayout({
           <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
             <Header />
             <main>{children}</main>
+            <Footer />
           </body>
         </QueryProvider>
       </html>

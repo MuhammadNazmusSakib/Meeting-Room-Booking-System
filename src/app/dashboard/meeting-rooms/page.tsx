@@ -50,7 +50,7 @@ export default function MeetingRooms() {
   const nextPage = () => setCurrentPage((prev) => Math.min(prev + 1, totalPages));
   const prevPage = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
 
-  if (isLoading) return <div className="text-center text-xl">Loading...</div>;
+  //if (isLoading) return <div className="text-center text-xl">Loading...</div>;
   if (error) return <div className="text-center text-red-500">Error loading data</div>;
 
   return (
