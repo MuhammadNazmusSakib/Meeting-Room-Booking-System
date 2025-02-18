@@ -26,15 +26,15 @@ const BookingList = () => {
   const { data: bookings = [], isLoading, error } = useQuery<BookingRoom[]>({
     queryKey: ["bookingRooms"],
     queryFn: async () => {
-      const response = await axios.get("/api/booking/user");  
-      return response.data.bookings;
+      const response = await axios.get("http://localhost:3000/api/booking/user");  
+      return response.data.bookings?? [];
     },
   });
 
   // Mutation for deleting a booking
   const deleteMutation = useMutation({
     mutationFn: async (bookingId: string) => {
-      const response = await axios.delete(`/api/booking/user/${bookingId}`);
+      const response = await axios.delete(`http://localhost:3000/api/booking/user/${bookingId}`);
       return response.data;
     },
     onSuccess: () => {
@@ -55,7 +55,7 @@ const BookingList = () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h2 className="text-2xl font-semibold mb-4">My Bookings</h2>
+      <h2 className="text-2xl font-bold uppercase mb-4">My Bookings</h2>
       {bookings.length === 0 && <p>No bookings available.</p>}
       {errorMessage && <div className="text-red-500">{errorMessage}</div>}
 
