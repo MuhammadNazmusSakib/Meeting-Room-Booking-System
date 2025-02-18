@@ -2,9 +2,12 @@
 "use client";
 
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { useRouter } from "next/navigation"; 
+import { useRouter } from "next/navigation";
 import axios from "axios";
 import { useState } from "react";
+
+const PAGE_SIZE = 5;
+
 
 type BookingRoom = {
   id: string;
@@ -21,13 +24,15 @@ const AllBookingList = () => {
   const [selectedBookingId, setSelectedBookingId] = useState<string | null>(null);
   const router = useRouter();
   const queryClient = useQueryClient();
+  const [currentPage, setCurrentPage] = useState(1);
+
 
   // Fetch meeting rooms
   const { data: bookings = [], isLoading, error } = useQuery<BookingRoom[]>({
     queryKey: ["bookingRooms"],
     queryFn: async () => {
-      const response = await axios.get("http://localhost:3000/api/booking");  
-      return response.data.bookingRoom?? [];
+      const response = await axios.get("http://localhost:3000/api/booking");
+      return response.data.bookingRoom ?? [];
     },
   });
 
@@ -53,6 +58,12 @@ const AllBookingList = () => {
     }
   };
 
+  const totalPages = Math.ceil(bookings.length / PAGE_SIZE);
+  const paginatedRooms = bookings.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
+
+  const nextPage = () => setCurrentPage((prev) => Math.min(prev + 1, totalPages));
+  const prevPage = () => setCurrentPage((prev) => Math.max(prev - 1, 1));
+
   return (
     <div className="container mx-auto p-4">
       <h2 className="text-2xl font-bold uppercase mb-4">All Bookings</h2>
@@ -61,7 +72,7 @@ const AllBookingList = () => {
 
       {/* List Format */}
       <div className="space-y-4">
-        {bookings.map((booking) => (
+        {paginatedRooms.map((booking) => (
           <div
             key={booking.id}
             className="bg-white shadow-md rounded-lg p-4 flex flex-col md:flex-row place-content-between gap-2"
@@ -118,6 +129,28 @@ const AllBookingList = () => {
           </div>
         </div>
       )}
+
+      {/* Pagination Controls */}
+      {totalPages > 1 && (
+        <div className="mt-6 flex justify-center space-x-4">
+          <button
+            onClick={prevPage}
+            disabled={currentPage === 1}
+            className={`px-4 py-2 rounded-lg ${currentPage === 1 ? "bg-gray-300 cursor-not-allowed" : "bg-blue-500 hover:bg-blue-600 text-white"}`}
+          >
+            Previous
+          </button>
+          <span className="text-lg font-semibold">Page {currentPage} of {totalPages}</span>
+          <button
+            onClick={nextPage}
+            disabled={currentPage === totalPages}
+            className={`px-4 py-2 rounded-lg ${currentPage === totalPages ? "bg-gray-300 cursor-not-allowed" : "bg-blue-500 hover:bg-blue-600 text-white"}`}
+          >
+            Next
+          </button>
+        </div>
+      )}
+
     </div>
   );
 };

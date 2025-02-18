@@ -1,11 +1,19 @@
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
+import { NextResponse } from 'next/server'
 
 const isPublicRoute = createRouteMatcher(['/', '/sign-in(.*)', '/sign-up(.*)'])
+
+const isAdminRoute = createRouteMatcher(['/dashboard/all-bookings(.*)', '/dashboard/all-rooms(.*)', '/dashboard/add-room(.*)'])
 
 export default clerkMiddleware(async (auth, request) => {
   if (!isPublicRoute(request)) {
     await auth.protect()
   }
+  if (isAdminRoute(request) && (await auth()).sessionClaims?.metadata?.role !== 'admin') {
+    const url = new URL('/', request.url)
+    return NextResponse.redirect(url)
+  }
+
 })
 
 export const config = {
