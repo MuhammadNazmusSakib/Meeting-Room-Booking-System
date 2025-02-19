@@ -1,9 +1,9 @@
 # Booking Meet Room Project
 
-**Admin Email:** admin@gmail.com
-**Password:** q1w1e1r1t1y1u1i1o1p$#@
+- **Admin Email:** admin@gmail.com
+- **Password:** q1w1e1r1t1y1u1i1o1p$#@
 
-## Live Link: [Live Link]()
+## Live Link: [Live Link](https://meeting-room-booking-system-ten.vercel.app/)
 
 ## Description
 
