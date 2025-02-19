@@ -25,6 +25,22 @@ type Booking = {
   endTime: string;
 };
 
+type SuccessResponse = {
+  response: {
+    data: {
+      message: string;
+    };
+  };
+};
+
+type ErrorResponse = {
+  response: {
+    data: {
+      message: string;
+    };
+  };
+};
+
 export default function RoomDetails() {
   const { id } = useParams();
   const searchParams = useSearchParams();
@@ -92,7 +108,7 @@ export default function RoomDetails() {
 
       return response.data;
     },
-    onSuccess: (succcess: any) => {
+    onSuccess: (succcess: SuccessResponse) => {
       // setMessage("Booking Successful!");
       if (succcess.response) {
         setMessage(succcess.response.data.message || "Edit Successful!...");
@@ -100,7 +116,7 @@ export default function RoomDetails() {
         setMessage("Edit Successful!..");
       }
     },
-    onError: (error: any) => {
+    onError: (error: ErrorResponse) => {
       if (error.response) {
         setErrorMessage(error.response.data.message || "Edit Failed. Please try again.");
       } else {

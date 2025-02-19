@@ -17,6 +17,13 @@ type MeetingRoom = {
     updatedAt: string;
 };
 
+type FormDataType = {
+    name: string;
+    capacity: number;
+    amenities: string[];
+    image: File | null;
+};
+
 const IMGBB_API_KEY = process.env.NEXT_PUBLIC_IMGBB_API_KEY;
 
 export default function RoomDetails() {
@@ -41,7 +48,7 @@ export default function RoomDetails() {
 
     // Mutation to handle the API request
     const mutation = useMutation({
-        mutationFn: async (formData: any) => {
+        mutationFn: async (formData: FormDataType) => {
             const response = await axios.put(`http://localhost:3000/api/meeting-rooms/${id}`, formData);
             return response.data;
         },
@@ -69,7 +76,7 @@ export default function RoomDetails() {
                 formData
             );
             return response.data.data.url; // Return image URL
-        } catch (error) {
+        } catch {
             setErrorMessage("Failed to upload image.");
             return null;
         }

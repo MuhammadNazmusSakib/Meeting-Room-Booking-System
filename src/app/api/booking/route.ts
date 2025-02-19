@@ -88,7 +88,7 @@ export const POST = async (req: NextRequest) => {
 
 
 // Need to work Later for [*admin authentication*]................................
-export const GET = async (req: Request) => {
+export const GET = async () => {
     try {
         // Fetch booking rooms from the database
         const bookingRoom = await prisma.booking.findMany()

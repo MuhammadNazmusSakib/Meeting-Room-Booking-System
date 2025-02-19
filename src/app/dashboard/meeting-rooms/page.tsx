@@ -23,7 +23,7 @@ export default function MeetingRooms() {
   const [selectedAmenities, setSelectedAmenities] = useState<string[]>([]);
   const [currentPage, setCurrentPage] = useState(1);
 
-  const { data: rooms = [], isLoading, error } = useQuery<MeetingRoom[]>({
+  const { data: rooms = [], error } = useQuery<MeetingRoom[]>({
     queryKey: ["meetingRooms"],
     queryFn: async () => {
       const response = await axios.get("http://localhost:3000/api/meeting-rooms");
