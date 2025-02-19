@@ -18,7 +18,7 @@ const AddMeetingRoom = () => {
   // Mutation to handle the API request
   const mutation = useMutation({
     mutationFn: async (formData: { name: string; capacity: number; amenities: string[]; image: string }) => {
-      const response = await axios.post("https://meeting-room-booking-system-hesqi0a12.vercel.app/api/meeting-rooms", formData);
+      const response = await axios.post("https://meeting-room-booking-system-ten.vercel.app/api/meeting-rooms", formData);
       return response.data;
     },
     onSuccess: () => {

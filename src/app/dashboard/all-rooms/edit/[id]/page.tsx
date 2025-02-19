@@ -41,7 +41,7 @@ export default function RoomDetails() {
     const { data: room, isLoading: roomLoading, error: roomError } = useQuery<MeetingRoom>({
         queryKey: ["meetingRoom", id],
         queryFn: async () => {
-            const response = await axios.get(`https://meeting-room-booking-system-hesqi0a12.vercel.app/api/meeting-rooms/${id}`);
+            const response = await axios.get(`https://meeting-room-booking-system-ten.vercel.app/api/meeting-rooms/${id}`);
             return response.data.room;
         },
     });
@@ -49,7 +49,7 @@ export default function RoomDetails() {
     // Mutation to handle the API request
     const mutation = useMutation({
         mutationFn: async (formData: FormDataType) => {
-            const response = await axios.put(`https://meeting-room-booking-system-hesqi0a12.vercel.app/api/meeting-rooms/${id}`, formData);
+            const response = await axios.put(`https://meeting-room-booking-system-ten.vercel.app/api/meeting-rooms/${id}`, formData);
             return response.data;
         },
         onSuccess: () => {

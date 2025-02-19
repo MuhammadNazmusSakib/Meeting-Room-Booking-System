@@ -26,7 +26,7 @@ export default function MeetingRooms() {
   const { data: rooms = [], error } = useQuery<MeetingRoom[]>({
     queryKey: ["meetingRooms"],
     queryFn: async () => {
-      const response = await axios.get("https://meeting-room-booking-system-hesqi0a12.vercel.app/api/meeting-rooms");
+      const response = await axios.get("https://meeting-room-booking-system-ten.vercel.app/api/meeting-rooms");
       return response.data.meetingRoom;
     },
   });

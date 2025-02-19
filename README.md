@@ -14,7 +14,7 @@ pnpm dev
 bun dev
 ```
 
-Open [https://meeting-room-booking-system-hesqi0a12.vercel.app](https://meeting-room-booking-system-hesqi0a12.vercel.app) with your browser to see the result.
+Open [https://meeting-room-booking-system-ten.vercel.app](https://meeting-room-booking-system-ten.vercel.app) with your browser to see the result.
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
