@@ -1,4 +1,4 @@
-import Image from "next/image";
+
 import Banner from "./components/Banner";
 import CoworkingInfo from "./components/CoworkingInfo";
 import CoworkingBenefits from "./components/CoworkingBenefits";

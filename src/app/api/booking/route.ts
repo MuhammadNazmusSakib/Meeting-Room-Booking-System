@@ -74,9 +74,10 @@ export const POST = async (req: NextRequest) => {
             { message: "Booking Created", booking: newBooking },
             { status: 201 }
         );
-    } catch (err: any) {
+    } catch (err) {
+        const errorMessage = err as string
         return NextResponse.json(
-            { message: "Error creating booking", error: err.message },
+            { message: "Error creating booking", error: errorMessage },
             { status: 500 }
         );
     } finally {

@@ -23,7 +23,7 @@ const BookingList = () => {
   const queryClient = useQueryClient();
 
   // Fetch meeting rooms
-  const { data: bookings = [], isLoading, error } = useQuery<BookingRoom[]>({
+  const { data: bookings = [] } = useQuery<BookingRoom[]>({
     queryKey: ["bookingRooms"],
     queryFn: async () => {
       const response = await axios.get("http://localhost:3000/api/booking/user");  

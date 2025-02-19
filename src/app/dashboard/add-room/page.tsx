@@ -17,7 +17,7 @@ const AddMeetingRoom = () => {
 
   // Mutation to handle the API request
   const mutation = useMutation({
-    mutationFn: async (formData: any) => {
+    mutationFn: async (formData: { name: string; capacity: number; amenities: string[]; image: string }) => {
       const response = await axios.post("http://localhost:3000/api/meeting-rooms", formData);
       return response.data;
     },
@@ -45,7 +45,7 @@ const AddMeetingRoom = () => {
         formData
       );
       return response.data.data.url; // Return image URL
-    } catch (error) {
+    } catch {
       setErrorMessage("Failed to upload image.");
       return null;
     }

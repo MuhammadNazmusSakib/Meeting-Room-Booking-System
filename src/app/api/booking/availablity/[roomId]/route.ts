@@ -22,9 +22,10 @@ export const GET = async (req: NextRequest, { params }: { params: { roomId: stri
 
     return NextResponse.json({ message: "Success", bookings }, { status: 200 });
 
-  } catch (err: any) {
+  } catch (err) {
+    const errorMessage = err as string
     return NextResponse.json(
-      { message: "Error fetching availability", error: err.message },
+      { message: "Error fetching availability", error: errorMessage },
       { status: 500 }
     );
   } finally {

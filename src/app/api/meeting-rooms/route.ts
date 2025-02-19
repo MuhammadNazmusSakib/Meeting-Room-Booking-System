@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server"
 import prisma from "../../../../prisma"
 
-export const GET = async (req: Request) => {
+export const GET = async () => {
     try {
         // Fetch rooms from the database
         const meetingRoom = await prisma.room.findMany()

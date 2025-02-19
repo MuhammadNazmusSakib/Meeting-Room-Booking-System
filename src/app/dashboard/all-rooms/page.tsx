@@ -122,6 +122,12 @@ export default function AllRooms() {
 
       {/* Room List */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        {errorMessage && (
+          <div className="text-red-500 text-center mt-4">
+            {errorMessage}
+          </div>
+        )}
         {paginatedRooms.length > 0 ? (
           paginatedRooms.map((room) => (
             <div key={room.id} className="bg-white flex flex-col rounded-xl shadow-lg overflow-hidden">

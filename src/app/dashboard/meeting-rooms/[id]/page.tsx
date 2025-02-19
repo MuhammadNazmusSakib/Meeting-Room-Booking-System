@@ -3,7 +3,7 @@
 
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import { useState } from "react";
@@ -23,6 +23,18 @@ type Booking = {
   startTime: string;
   endTime: string;
 };
+
+type SuccessResponse = {
+  response: {
+    data: {
+      message: string;
+    };
+  };
+}
+
+interface ErrorResponse {
+  message: string;
+}
 
 export default function RoomDetails() {
   const { id } = useParams();
@@ -88,7 +100,7 @@ export default function RoomDetails() {
 
       return response.data;
     },
-    onSuccess: (succcess: any) => {
+    onSuccess: (succcess: SuccessResponse) => {
       // setMessage("Booking Successful!");
       if (succcess.response) {
         setMessage(succcess.response.data.message || "Booking Successful!...");
@@ -96,7 +108,7 @@ export default function RoomDetails() {
         setMessage("Booking Successful!..");
       }
     },
-    onError: (error: any) => {
+    onError: (error: AxiosError<ErrorResponse>) => {
       if (error.response) {
         setErrorMessage(error.response.data.message || "Booking Failed. Please try again.");
       } else {

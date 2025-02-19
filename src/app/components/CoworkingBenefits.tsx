@@ -9,7 +9,7 @@ const CoworkingBenefits = () => {
           Coworking Benefits <br /> Businesses of Every <span className="text-red-500">Size.</span>
         </h2>
         <p className="mt-4 text-gray-600">
-          Coworking spaces have a universal appeal for any kind of business. Whether you're a 
+          Coworking spaces have a universal appeal for any kind of business. Whether you are a 
           one-person startup or a global company with offices that span five continents. Our flexible 
           coworking spaces are backed up with expert, on-site support from receptionists, through to 
           IT, cleaning, and security staff.
