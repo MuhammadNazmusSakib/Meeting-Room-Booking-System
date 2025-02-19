@@ -29,16 +29,14 @@ To get started with the project, follow these setup instructions:
    npm install
 
 2. **.env.local file**
-
+    ```bash
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_cXVpZXQtbHlueC0zMS5jbGVyay5hY2NvdW50cy5kZXYk
     CLERK_SECRET_KEY=sk_test_1dgXpZ0lW4aFQiWFv6TMCUZ6UWS2dSxr4hTZzAOEm8
     NEXT_PUBLIC_CLERK_SIGN_IN_URL=/sign-in
     NEXT_PUBLIC_CLERK_SIGN_UP_URL=/sign-up
     NEXT_PUBLIC_CLERK_SIGN_IN_FALLBACK_REDIRECT_URL=/dashboard/meeting-rooms
     NEXT_PUBLIC_CLERK_SIGN_UP_FALLBACK_REDIRECT_URL=/dashboard/meeting-rooms
-
     NEXT_PUBLIC_IMGBB_API_KEY=e3566fd23cf80c6dfdf0c94b45ef9d0c
-
     DATABASE_URL=mongodb+srv://sakib21feb:GGpye9Q6RVeihluH@cluster0.eqdse.mongodb.net/MeetingRoomBookingSystem?retryWrites=true&w=majority&appName=Cluster0
 
 
@@ -47,30 +45,30 @@ To get started with the project, follow these setup instructions:
     npm run dev
 
 4. **Dependencies**
-
-"dependencies": {
-    "@clerk/nextjs": "^6.11.3",
-    "@prisma/client": "^6.3.1",
-    "@tanstack/react-query": "^5.66.3",
-    "axios": "^1.7.9",
-    "mongodb": "^6.13.0",
-    "next": "14.2.24",
-    "react": "^18",
-    "react-calendar": "^5.1.0",
-    "react-dom": "^18",
-    "react-icons": "^5.4.0"
-  },
-"devDependencies": {
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
-    "eslint": "^8",
-    "eslint-config-next": "14.2.24",
-    "postcss": "^8",
-    "prisma": "^6.3.1",
-    "tailwindcss": "^3.4.1",
-    "typescript": "^5"
-  }
+    ```bash
+    "dependencies": {
+        "@clerk/nextjs": "^6.11.3",
+        "@prisma/client": "^6.3.1",
+        "@tanstack/react-query": "^5.66.3",
+        "axios": "^1.7.9",
+        "mongodb": "^6.13.0",
+        "next": "14.2.24",
+        "react": "^18",
+        "react-calendar": "^5.1.0",
+        "react-dom": "^18",
+        "react-icons": "^5.4.0"
+    },
+    "devDependencies": {
+        "@types/node": "^20",
+        "@types/react": "^18",
+        "@types/react-dom": "^18",
+        "eslint": "^8",
+        "eslint-config-next": "14.2.24",
+        "postcss": "^8",
+        "prisma": "^6.3.1",
+        "tailwindcss": "^3.4.1",
+        "typescript": "^5"
+    }
 
 5. ## Technologies Used
 
