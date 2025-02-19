@@ -105,6 +105,9 @@ export default function RoomDetails() {
     },
   });
 
+  // Get today's date in YYYY-MM-DD format
+  const today = new Date().toISOString().split("T")[0];
+
   if (roomLoading || bookingsLoading) return <div className="text-center text-xl">Loading...</div>;
   if (roomError || bookingsError) return <div className="text-center text-red-500">Error loading data</div>;
 
@@ -141,6 +144,7 @@ export default function RoomDetails() {
           type="date"
           className="w-full p-2 border rounded mt-1"
           value={startDate}
+          min={today} // Allows today or future dates
           onChange={(e) => setStartDate(e.target.value)}
         />
 
@@ -149,6 +153,7 @@ export default function RoomDetails() {
           type="date"
           className="w-full p-2 border rounded mt-1"
           value={endDate}
+          min={startDate || today} // Ensures end date is not before start date
           onChange={(e) => setEndDate(e.target.value)}
         />
 

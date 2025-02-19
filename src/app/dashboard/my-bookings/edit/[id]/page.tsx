@@ -66,11 +66,11 @@ export default function RoomDetails() {
 
       const formattedStartTime = new Date(`${startDate}T${startTime}:00`)
       const formattedEndTime = new Date(`${endDate}T${endTime}:00`)
-      
+
 
       // Check if startTime is after endTime
       if (formattedStartTime >= formattedEndTime) {
-         setErrorMessage("Start time must be before end time.");
+        setErrorMessage("Start time must be before end time.");
         return;
       }
 
@@ -79,7 +79,7 @@ export default function RoomDetails() {
       const diffInMinutes = diffInMs / (1000 * 60);
 
       if (diffInMinutes < 30) {
-         setErrorMessage("Booking duration should be at least 30 minutes.");
+        setErrorMessage("Booking duration should be at least 30 minutes.");
         return;
       }
 
@@ -109,6 +109,9 @@ export default function RoomDetails() {
     },
   });
 
+  // Get today's date in YYYY-MM-DD format
+  const today = new Date().toISOString().split("T")[0];
+
   if (roomLoading || bookingsLoading) return <div className="text-center text-xl">Loading...</div>;
   if (roomError || bookingsError) return <div className="text-center text-red-500">Error loading data</div>;
 
@@ -129,7 +132,7 @@ export default function RoomDetails() {
       {/* Calendar View for Availability */}
       <div className="w-full sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl mt-6">
         <h2 className="text-xl font-semibold mb-2">Room Availability</h2>
-        <Calendar 
+        <Calendar
           tileDisabled={({ date }) =>
             (bookedDates ?? []).some((bookedDate) => bookedDate.toDateString() === date.toDateString())
           }
@@ -145,6 +148,7 @@ export default function RoomDetails() {
           type="date"
           className="w-full p-2 border rounded mt-1"
           value={startDate}
+          min={today} // Allows today or future dates
           onChange={(e) => setStartDate(e.target.value)}
         />
 
@@ -153,6 +157,7 @@ export default function RoomDetails() {
           type="date"
           className="w-full p-2 border rounded mt-1"
           value={endDate}
+          min={startDate || today} // Ensures end date is not before start date
           onChange={(e) => setEndDate(e.target.value)}
         />
 
