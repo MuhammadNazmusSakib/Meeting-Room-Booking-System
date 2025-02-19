@@ -26,7 +26,7 @@ const BookingList = () => {
   const { data: bookings = [] } = useQuery<BookingRoom[]>({
     queryKey: ["bookingRooms"],
     queryFn: async () => {
-      const response = await axios.get("http://localhost:3000/api/booking/user");  
+      const response = await axios.get("https://meeting-room-booking-system-hesqi0a12.vercel.app/api/booking/user");  
       return response.data.bookings?? [];
     },
   });
@@ -34,7 +34,7 @@ const BookingList = () => {
   // Mutation for deleting a booking
   const deleteMutation = useMutation({
     mutationFn: async (bookingId: string) => {
-      const response = await axios.delete(`http://localhost:3000/api/booking/user/${bookingId}`);
+      const response = await axios.delete(`https://meeting-room-booking-system-hesqi0a12.vercel.app/api/booking/user/${bookingId}`);
       return response.data;
     },
     onSuccess: () => {

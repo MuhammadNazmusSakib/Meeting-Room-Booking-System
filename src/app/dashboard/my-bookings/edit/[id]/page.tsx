@@ -58,7 +58,7 @@ export default function RoomDetails() {
   const { data: room, isLoading: roomLoading, error: roomError } = useQuery<MeetingRoom>({
     queryKey: ["meetingRoom", bookId],
     queryFn: async () => {
-      const response = await axios.get(`http://localhost:3000/api/meeting-rooms/${bookId}`);
+      const response = await axios.get(`https://meeting-room-booking-system-hesqi0a12.vercel.app/api/meeting-rooms/${bookId}`);
       return response.data.room;
     },
   });
@@ -67,7 +67,7 @@ export default function RoomDetails() {
   const { data: bookings, isLoading: bookingsLoading, error: bookingsError } = useQuery<Booking[]>({
     queryKey: ["roomAvailability", bookId],
     queryFn: async () => {
-      const response = await axios.get(`http://localhost:3000/api/booking/availablity/${bookId}`);
+      const response = await axios.get(`https://meeting-room-booking-system-hesqi0a12.vercel.app/api/booking/availablity/${bookId}`);
       return response.data.bookings;
     },
   });
@@ -99,7 +99,7 @@ export default function RoomDetails() {
         return;
       }
 
-      const response = await axios.put(`http://localhost:3000/api/booking/user/${id}`, {
+      const response = await axios.put(`https://meeting-room-booking-system-hesqi0a12.vercel.app/api/booking/user/${id}`, {
         // roomId: id,
         // title: room?.name || "Meeting Room",
         startTime: formattedStartTime.toISOString(),

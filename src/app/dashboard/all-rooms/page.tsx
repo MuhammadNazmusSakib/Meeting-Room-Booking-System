@@ -33,7 +33,7 @@ export default function AllRooms() {
   const { data: rooms = [], isLoading, error } = useQuery<MeetingRoom[]>({
     queryKey: ["meetingRooms"],
     queryFn: async () => {
-      const response = await axios.get("http://localhost:3000/api/meeting-rooms");
+      const response = await axios.get("https://meeting-room-booking-system-hesqi0a12.vercel.app/api/meeting-rooms");
       return response.data.meetingRoom;
     },
   });
@@ -41,7 +41,7 @@ export default function AllRooms() {
   // Mutation for deleting a booking
   const deleteMutation = useMutation({
     mutationFn: async (roomId: string) => {
-      const response = await axios.delete(`http://localhost:3000/api/meeting-rooms/${roomId}`);
+      const response = await axios.delete(`https://meeting-room-booking-system-hesqi0a12.vercel.app/api/meeting-rooms/${roomId}`);
       return response.data;
     },
     onSuccess: () => {
